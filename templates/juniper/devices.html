@@ -1,0 +1,61 @@
+{% extends 'global_temps/base.html' %}
+
+{% block title %} Device Database {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <!-- Buttons for Devices -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Juniper Devices</h4>
+            </div>
+            <div class="panel-body">
+                <button type="button" class="btn">
+                    <a href="{% url 'juniper:device-add' %}">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; Add Device
+                    </a>
+                </button>
+                <button type="button" class="btn">
+                    <a href="#">
+                        <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>&nbsp; Collect All
+                    </a>
+                </button>
+            </div>
+        </div>
+
+
+        <!--Device Panel -->
+        {% for device in all_devices %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a href="{% url 'juniper:detail' device.host_name %}">{{ device.host_name }}</a>
+                </div>
+                <div class="panel-body">
+                    <form action="{% url 'juniper:get-info' device.host_name %}" method="post" style="display: inline";>
+                            {% csrf_token %}
+                            <input type="hidden" name="device_host_name" value="{{ device.host_name }}"/>
+                            <button type="submit" class="btn btn-default btn-sm">
+                                <span class="glyphicon glyphicon-arrow-up"></span>
+                            </button>
+                        </form>
+                        <!-- Delete -->
+                        <form action="{% url 'juniper:device-delete' device.host_name %}" method="post" style="display: inline";>
+                            {% csrf_token %}
+                            <input type="hidden" name="device_host_name" value="{{ device.host_name }}"/>
+                            <button type="submit" class="btn btn-default btn-sm">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </form>
+                        <!-- Update -->
+                        <form action="{% url 'juniper:device-update' device.host_name %}" method="get" style="display: inline";>
+                            {% csrf_token %}
+                            <input type="hidden" name="device_host_name" value="{{ device.host_name }}"/>
+                            <button type="submit" class="btn btn-default btn-sm">
+                                <span class="glyphicon glyphicon-wrench"></span>
+                            </button>
+                        </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

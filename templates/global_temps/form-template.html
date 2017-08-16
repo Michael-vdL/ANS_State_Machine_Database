@@ -1,0 +1,33 @@
+{% load  field_type %}
+
+<script>
+    var counter = 0;
+    function increase_counter() {
+        counter++;
+        document.getElementById('counter').innerHTML = counter
+    }
+</script>
+
+{% for field in form %}
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <span class="text-danger small">{{ field.errors }}</span>
+        </div>
+        <label class="control-label col-sm-2">{{ field.label_tag }}</label>
+        {% if field|fieldtype == "SelectMultiple" %}
+            <!-- Drop Down Menu for Options -->
+            <div class="col-sm-10">
+                <p id="counter"></p>
+                <form action="" method="post" style="display: inline";>
+                    <input type="hidden" onclick="increase_counter();">
+                    <button type="button" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </form>
+            </div>
+        {% elif field|fieldtype == "TextInput" %}
+            <!-- Text Input -->
+            <div class="col-sm-10">{{ field }}</div>
+        {% endif %}
+    </div>
+{% endfor %}

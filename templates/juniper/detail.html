@@ -1,0 +1,37 @@
+{% extends 'global_temps/base.html' %}
+{% block title %}Details: {{ device.host_name }}{% endblock %}
+{% block content %}
+<h1>{{ device.host_name }}</h1>
+<head>
+    <style>
+        dl {  list-style-type: disc;  margin: 0;  padding: 0;  overflow: hidden;  background-color: #333333;  }
+        dt {  float: left;  }
+        dt a {  display: block;  color: white;  text-align: center;  padding: 16px;  text-decoration: none;  }
+        dt a:hover {background-color: #111111;}
+        dd { float: left;   }
+        dd a { display: block; color: white; text-align: center; padding: 16px; text-decoration: overline; }
+        dd a:hover {background-color: #CC1111;}
+    </style>
+</head>
+
+<body>
+<h3> User Table: </h3>
+<dl>
+    <dt><a href="#name">Name</a></dt>
+    <dt><a href="#full_name">Full-Name</a></dt>
+    <dt><a href="#id">User ID</a></dt>
+    <dt><a href="#class">Permission Class</a></dt>
+</dl>
+
+
+<h3> Interface Table: </h3>
+<dl>
+    <dt><a href="#interface">Interface</a></dt>
+    <dt><a href="#Admin">Admin</a></dt>
+    <dt><a href="#Link">Link</a></dt>
+    <dt><a href="#Proto">Proto</a></dt>
+    <dt><a href="#Local">Local</a></dt>
+    <dt><a href="#Remote">Remote</a></dt>
+</dl>
+{% endblock %}
+
